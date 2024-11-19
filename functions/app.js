@@ -1,15 +1,26 @@
-const express = require('express')
-const ServerlessHttp = require('serverless-http')
-const app = express()
-const port = 3000
+// const express = require('express')
+// const ServerlessHttp = require('serverless-http')
+// const app = express()
+// const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello World!')
+// })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`)
+// })
 
 
-module.exports.handler = ServerlessHttp(app)
+// module.exports.handler = ServerlessHttp(app)
+const express = require("express");
+const serverless = require("serverless-http");
+const app = express();
+const router = express.Router();
+
+router.get("/", (req, res) => {
+    res.send("App is running..");
+});
+
+app.use("/.netlify/functions/app", router);
+module.exports.handler = serverless(app);
